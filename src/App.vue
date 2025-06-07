@@ -46,7 +46,7 @@ const handleAnswer = (questionIndex: number, answer: string | string[]) => {
 
 <template>
   <div class="min-h-screen bg-blue-100 flex items-center justify-center p-4 sm:p-6 lg:p-8">
-    <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-md md:max-w-xl lg:max-w-3xl">
+    <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-md md:max-w-xl ">
       <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 text-blue-700">Frontend Quiz</h1>
 
       <div v-if="!quizSubmitted">
