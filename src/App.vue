@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import QuizQuestion from './reviewer/HomeReview.vue'
-import { questions, Question } from './data/questions';
+import { questions } from './data/questions';
 
 const userAnswers = ref<Record<number, string | string[]>>({});
 const quizSubmitted = ref(false);
@@ -46,9 +46,8 @@ const handleAnswer = (questionIndex: number, answer: string | string[]) => {
 
 <template>
   <div class="min-h-screen bg-blue-100 flex items-center justify-center p-4">
-    <!-- <div class="bg-white p-8 rounded-lg shadow-lg w-800 max-w-2xl"> -->
     <div class="bg-white p-8 rounded-lg shadow-lg w-800">
-      <h1 class="text-3xl font-bold text-center mb-6 text-blue-700">Frontend Development Quiz</h1>
+      <h1 class="text-3xl font-bold text-center mb-6 text-blue-700">Frontend Quiz</h1>
 
       <div v-if="!quizSubmitted">
         <QuizQuestion
@@ -63,7 +62,7 @@ const handleAnswer = (questionIndex: number, answer: string | string[]) => {
           @click="submitQuiz"
           class="mt-8 w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out font-semibold"
         >
-          Submit Quiz
+          Submit
         </button>
       </div>
 
@@ -110,7 +109,7 @@ const handleAnswer = (questionIndex: number, answer: string | string[]) => {
           @click="resetQuiz"
           class="mt-8 w-full bg-indigo-600 text-white py-3 rounded-md hover:bg-indigo-700 transition duration-300 ease-in-out font-semibold"
         >
-          Retake Quiz
+          Retake
         </button>
       </div>
     </div>
