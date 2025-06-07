@@ -45,9 +45,10 @@ const handleAnswer = (questionIndex: number, answer: string | string[]) => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-blue-100 flex items-center justify-center p-4 sm:p-6 lg:p-8">
-    <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-md md:max-w-xl ">
-      <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 text-blue-700">Frontend Quiz</h1>
+  <div class="min-h-screen bg-blue-100 flex items-center justify-center p-4">
+    <!-- <div class="bg-white p-8 rounded-lg shadow-lg w-800"> -->
+      <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg md:max-w-2xl lg:max-w-3xl">
+      <h1 class="text-3xl font-bold text-center mb-6 text-blue-700">Frontend Quiz</h1>
 
       <div v-if="!quizSubmitted">
         <QuizQuestion
@@ -60,56 +61,56 @@ const handleAnswer = (questionIndex: number, answer: string | string[]) => {
         />
         <button
           @click="submitQuiz"
-          class="mt-6 sm:mt-8 w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out font-semibold text-base sm:text-lg"
+          class="mt-8 w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out font-semibold"
         >
           Submit
         </button>
       </div>
 
       <div v-else class="text-center">
-        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-green-700">Quiz Results</h2>
-        <p class="text-lg sm:text-xl mb-6">You scored <span class="font-extrabold text-blue-600">{{ score }}</span> out of <span class="font-extrabold text-blue-600">{{ totalQuestions }}</span> questions correctly!</p>
+        <h2 class="text-2xl font-bold mb-4 text-green-700">Quiz Results</h2>
+        <p class="text-xl mb-6">You scored <span class="font-extrabold text-blue-600">{{ score }}</span> out of <span class="font-extrabold text-blue-600">{{ totalQuestions }}</span> questions correctly!</p>
 
-        <div class="mt-6 sm:mt-8">
-          <h3 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-800">Review Your Answers:</h3>
-          <div
-            v-for="(question, index) in questions"
-            :key="index"
-            class="mb-4 sm:mb-6 p-4 sm:p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out border border-gray-100 w-full text-left"
-          >
-            <p class="font-extrabold text-lg sm:text-xl mb-2 sm:mb-4 text-gray-900 leading-relaxed">
-              <span class="text-blue-600 mr-2">{{ index + 1 }}.</span> {{ question.questionText }}
-            </p>
-            <p class="text-sm sm:text-base text-gray-700 mb-1">
-              Your answer:
-              <span
-                class="font-semibold"
-                :class="{
-                  'text-green-600': Array.isArray(question.correctAnswer)
-                    ? (Array.isArray(userAnswers[index]) && (userAnswers[index] as string[]).every(ans => question.correctAnswer.includes(ans)) && (userAnswers[index] as string[]).length === question.correctAnswer.length)
-                    : userAnswers[index] === question.correctAnswer,
-                  'text-red-600': Array.isArray(question.correctAnswer)
-                    ? !(Array.isArray(userAnswers[index]) && (userAnswers[index] as string[]).every(ans => question.correctAnswer.includes(ans)) && (userAnswers[index] as string[]).length === question.correctAnswer.length)
-                    : userAnswers[index] !== question.correctAnswer
-                }"
-              >
-                {{ Array.isArray(userAnswers[index]) ? (userAnswers[index] as string[]).join(', ') : (userAnswers[index] || 'No answer') }}
-              </span>
-            </p>
-            <p class="text-sm sm:text-base text-gray-700">
-              Correct answer:
-              <span class="font-semibold text-green-600">
-                {{ Array.isArray(question.correctAnswer) ? question.correctAnswer.join(', ') : question.correctAnswer }}
-              </span>
-            </p>
-          </div>
-        </div>
+        <div class="mt-8">
+  <h3 class="text-2xl font-bold mb-6 text-gray-800">Review Your Answers:</h3>
+  <div
+    v-for="(question, index) in questions"
+    :key="index"
+    class="mb-6 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out border border-gray-100 w-full text-left"
+  >
+    <p class="font-extrabold text-xl mb-4 text-gray-900 leading-relaxed">
+      <span class="text-blue-600 mr-2">{{ index + 1 }}.</span> {{ question.questionText }}
+    </p>
+    <p class="text-gray-700 mb-1">
+      Your answer:
+      <span
+        class="font-semibold"
+        :class="{
+          'text-green-600': Array.isArray(question.correctAnswer)
+            ? (Array.isArray(userAnswers[index]) && (userAnswers[index] as string[]).every(ans => question.correctAnswer.includes(ans)) && (userAnswers[index] as string[]).length === question.correctAnswer.length)
+            : userAnswers[index] === question.correctAnswer,
+          'text-red-600': Array.isArray(question.correctAnswer)
+            ? !(Array.isArray(userAnswers[index]) && (userAnswers[index] as string[]).every(ans => question.correctAnswer.includes(ans)) && (userAnswers[index] as string[]).length === question.correctAnswer.length)
+            : userAnswers[index] !== question.correctAnswer
+        }"
+      >
+        {{ Array.isArray(userAnswers[index]) ? (userAnswers[index] as string[]).join(', ') : (userAnswers[index] || 'No answer') }}
+      </span>
+    </p>
+    <p class="text-gray-700">
+      Correct answer:
+      <span class="font-semibold text-green-600">
+        {{ Array.isArray(question.correctAnswer) ? question.correctAnswer.join(', ') : question.correctAnswer }}
+      </span>
+    </p>
+  </div>
+</div>
 
         <button
           @click="resetQuiz"
-          class="mt-6 sm:mt-8 w-full bg-indigo-600 text-white py-3 rounded-md hover:bg-indigo-700 transition duration-300 ease-in-out font-semibold text-base sm:text-lg"
+          class="mt-8 w-full bg-indigo-600 text-white py-3 rounded-md hover:bg-indigo-700 transition duration-300 ease-in-out font-semibold"
         >
-          Retake
+          Retake Quiz
         </button>
       </div>
     </div>
