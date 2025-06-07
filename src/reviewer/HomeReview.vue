@@ -47,8 +47,8 @@ const handleTextChange = (event: Event) => {
 </script>
 
 <template>
-  <div class="mb-6 p-4 sm:p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out border border-gray-100 w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto">
-    <p class="font-extrabold text-lg sm:text-xl md:text-2xl mb-4 text-gray-900 leading-relaxed">
+  <div class="mb-6 p-4 sm:p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out border border-gray-100 w-full max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto">
+    <p class="font-extrabold text-base sm:text-lg md:text-xl mb-4 text-gray-900 leading-relaxed">
       <span class="text-blue-600 mr-2">{{ questionIndex + 1 }}.</span> {{ question.questionText }}
     </p>
 
@@ -56,7 +56,7 @@ const handleTextChange = (event: Event) => {
       <label
         v-for="option in question.options"
         :key="option"
-        class="flex items-center mb-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 ease-in-out w-full"
+        class="flex flex-col sm:flex-row sm:items-center gap-2 mb-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 ease-in-out w-full"
         :class="{ 'bg-blue-100 border-blue-500 shadow-sm': selectedOption === option }"
       >
         <input
@@ -65,9 +65,9 @@ const handleTextChange = (event: Event) => {
           :value="option"
           :checked="selectedOption === option"
           @change="handleRadioChange"
-          class="mr-3 h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 form-radio transition-all duration-200 ease-in-out"
+          class="h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 form-radio transition-all duration-200 ease-in-out"
         />
-        <span class="text-gray-700">{{ option }}</span>
+        <span class="text-gray-700 text-sm sm:text-base break-words w-full">{{ option }}</span>
       </label>
     </div>
 
@@ -75,7 +75,7 @@ const handleTextChange = (event: Event) => {
       <label
         v-for="option in question.options"
         :key="option"
-        class="flex items-center mb-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 ease-in-out w-full"
+        class="flex flex-col sm:flex-row sm:items-center gap-2 mb-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 ease-in-out w-full"
         :class="{ 'bg-blue-100 border-blue-500 shadow-sm': Array.isArray(selectedOption) && selectedOption.includes(option) }"
       >
         <input
@@ -84,9 +84,9 @@ const handleTextChange = (event: Event) => {
           :value="option"
           :checked="Array.isArray(selectedOption) && selectedOption.includes(option)"
           @change="handleCheckboxChange"
-          class="mr-3 h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 form-checkbox transition-all duration-200 ease-in-out"
+          class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 form-checkbox transition-all duration-200 ease-in-out"
         />
-        <span class="text-gray-700">{{ option }}</span>
+        <span class="text-gray-700 text-sm sm:text-base break-words w-full">{{ option }}</span>
       </label>
     </div>
 
@@ -95,14 +95,14 @@ const handleTextChange = (event: Event) => {
         type="text"
         :value="selectedOption as string"
         @input="handleTextChange"
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 ease-in-out shadow-sm"
+        class="w-full px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 ease-in-out shadow-sm"
         placeholder="Type your answer here..."
       />
     </div>
 
     <div v-else-if="question.type === 'boolean'">
       <label
-        class="flex items-center mb-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 ease-in-out w-full"
+        class="flex flex-col sm:flex-row sm:items-center gap-2 mb-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 ease-in-out w-full"
         :class="{ 'bg-blue-100 border-blue-500 shadow-sm': selectedOption === 'Y' }"
       >
         <input
@@ -111,12 +111,12 @@ const handleTextChange = (event: Event) => {
           value="Y"
           :checked="selectedOption === 'Y'"
           @change="handleRadioChange"
-          class="mr-3 h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 form-radio transition-all duration-200 ease-in-out"
+          class="h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 form-radio transition-all duration-200 ease-in-out"
         />
-        <span class="text-gray-700">Yes</span>
+        <span class="text-gray-700 text-sm sm:text-base w-full">Yes</span>
       </label>
       <label
-        class="flex items-center mb-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 ease-in-out w-full"
+        class="flex flex-col sm:flex-row sm:items-center gap-2 mb-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 ease-in-out w-full"
         :class="{ 'bg-blue-100 border-blue-500 shadow-sm': selectedOption === 'N' }"
       >
         <input
@@ -125,9 +125,9 @@ const handleTextChange = (event: Event) => {
           value="N"
           :checked="selectedOption === 'N'"
           @change="handleRadioChange"
-          class="mr-3 h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 form-radio transition-all duration-200 ease-in-out"
+          class="h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 form-radio transition-all duration-200 ease-in-out"
         />
-        <span class="text-gray-700">No</span>
+        <span class="text-gray-700 text-sm sm:text-base w-full">No</span>
       </label>
     </div>
   </div>
